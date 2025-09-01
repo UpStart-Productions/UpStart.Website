@@ -7,6 +7,7 @@ draft: false
 {{< aos-wrapper animation="fade-up" duration="1000" >}}
 # Welcome to UpStart Productions
 
+HEYYY!!! WE DID A GH DEPLOY.
 We're a creative technology company that helps businesses innovate, grow, and succeed in the digital age. From web development to product design, we bring your ideas to life with cutting-edge solutions and exceptional craftsmanship.
 {{< /aos-wrapper >}}
 
