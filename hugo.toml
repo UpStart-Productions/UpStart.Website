@@ -5,6 +5,7 @@ theme = "blowfish"
 pagination.pagerSize = 12
 enableRobotsTXT = true
 canonifyURLs = true
+relativeURLs = true
 
 # Clean URLs (Hugo default, but explicit here)
 disablePathToLower = false
