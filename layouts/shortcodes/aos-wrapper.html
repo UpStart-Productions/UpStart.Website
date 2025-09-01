@@ -1,0 +1,33 @@
+{{/*
+AOS Wrapper Shortcode
+Usage: {{< aos-wrapper animation="fade-up" duration="1000" delay="200" >}}Content{{< /aos-wrapper >}}
+
+Parameters:
+- animation: AOS animation type (fade-up, fade-down, fade-left, fade-right, zoom-in, zoom-out, etc.)
+- duration: Animation duration in milliseconds (default: 800)
+- delay: Animation delay in milliseconds (default: 0)
+- offset: Offset from the original trigger point (default: 120)
+- easing: Easing function (default: ease-out-cubic)
+- once: Whether animation should happen only once (default: true)
+- anchor-placement: Anchor placement for trigger (default: top-bottom)
+*/}}
+
+{{- $animation := .Get "animation" | default "fade-up" -}}
+{{- $duration := .Get "duration" | default "800" -}}
+{{- $delay := .Get "delay" | default "0" -}}
+{{- $offset := .Get "offset" | default "120" -}}
+{{- $easing := .Get "easing" | default "ease-out-cubic" -}}
+{{- $once := .Get "once" | default "true" -}}
+{{- $anchorPlacement := .Get "anchor-placement" | default "top-bottom" -}}
+
+<div 
+  data-aos="{{ $animation }}"
+  {{- if ne $duration "800" }} data-aos-duration="{{ $duration }}"{{ end }}
+  {{- if ne $delay "0" }} data-aos-delay="{{ $delay }}"{{ end }}
+  {{- if ne $offset "120" }} data-aos-offset="{{ $offset }}"{{ end }}
+  {{- if ne $easing "ease-out-cubic" }} data-aos-easing="{{ $easing }}"{{ end }}
+  {{- if ne $once "true" }} data-aos-once="{{ $once }}"{{ end }}
+  {{- if ne $anchorPlacement "top-bottom" }} data-aos-anchor-placement="{{ $anchorPlacement }}"{{ end }}
+>
+  {{ .Inner }}
+</div>

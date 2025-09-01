@@ -1,0 +1,48 @@
+<!-- AOS (Animate On Scroll) CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<!-- Custom AOS overrides with prefers-reduced-motion support -->
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    [data-aos] {
+      animation-duration: 0s !important;
+      animation-delay: 0s !important;
+      transition-duration: 0s !important;
+      transition-delay: 0s !important;
+    }
+  }
+  
+  /* Enhanced AOS animations for better visual appeal */
+  [data-aos="fade-up"] {
+    transform: translate3d(0, 40px, 0);
+  }
+  
+  [data-aos="fade-down"] {
+    transform: translate3d(0, -40px, 0);
+  }
+  
+  [data-aos="fade-left"] {
+    transform: translate3d(-40px, 0, 0);
+  }
+  
+  [data-aos="fade-right"] {
+    transform: translate3d(40px, 0, 0);
+  }
+  
+  [data-aos="zoom-in"] {
+    transform: scale(0.8);
+  }
+  
+  [data-aos="zoom-out"] {
+    transform: scale(1.2);
+  }
+  
+  /* Subtle shadow animation for cards */
+  .aos-animate .shadow-lg {
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .aos-animate .shadow-lg:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+</style>

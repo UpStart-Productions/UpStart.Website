@@ -1,0 +1,39 @@
+<!-- AOS (Animate On Scroll) JavaScript -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+  // Initialize AOS with custom settings
+  AOS.init({
+    duration: 800,        // Animation duration in milliseconds
+    easing: 'ease-out-cubic', // Easing function
+    once: true,           // Animation happens only once
+    offset: 120,          // Offset from the original trigger point
+    delay: 0,             // Global delay
+    anchorPlacement: 'top-bottom', // Anchor placement
+    disable: function() {
+      // Disable AOS on mobile devices for better performance
+      var maxWidth = 768;
+      return window.innerWidth < maxWidth;
+    }
+  });
+  
+  // Respect user's motion preferences
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Disable AOS for users who prefer reduced motion
+    AOS.init({
+      duration: 0,
+      delay: 0,
+      once: true,
+      offset: 0
+    });
+  }
+  
+  // Refresh AOS on window resize for better responsiveness
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      AOS.refresh();
+    }, 250);
+  });
+</script>

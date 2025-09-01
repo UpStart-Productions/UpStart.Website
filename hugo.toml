@@ -1,0 +1,89 @@
+baseURL = "https://upstartproductions.com"
+languageCode = "en-us"
+title = "UpStart Productions"
+theme = "blowfish"
+
+# Clean URL structure
+[permalinks]
+  posts = "/:slug/"
+
+# Menu configuration
+[menu]
+  [[menu.main]]
+    name = "Home"
+    pageRef = "/"
+    weight = 10
+
+  [[menu.main]]
+    name = "About"
+    pageRef = "/about"
+    weight = 20
+
+  [[menu.main]]
+    name = "Services"
+    pageRef = "/services"
+    weight = 30
+
+  [[menu.main]]
+    name = "Portfolio"
+    pageRef = "/portfolio"
+    weight = 40
+
+  [[menu.main]]
+    name = "Nepho"
+    pageRef = "/nepho"
+    weight = 50
+
+  [[menu.main]]
+    name = "Contact"
+    pageRef = "/contact"
+    weight = 60
+
+# Blowfish theme parameters
+[params]
+  colorScheme = "auto"
+  defaultAppearance = "light"
+  autoSwitchAppearance = true
+  
+  # Site metadata
+  description = "UpStart Productions - Creative solutions and innovative technology"
+  
+  # Homepage layout
+  homepage.layout = "hero"
+  
+  # Article settings
+  article.showDate = true
+  article.showDateUpdated = false
+  article.showAuthor = false
+  article.showWordCount = false
+  article.showReadingTime = false
+  article.showEdit = false
+  article.showViews = false
+  article.showLikes = false
+  article.showTaxonomies = false
+  article.showPagination = true
+  article.invertPagination = false
+  article.showToC = false
+  article.tocOpen = false
+  
+  # List settings
+  list.showBreadcrumbs = false
+  list.showSummary = false
+  list.showViews = false
+  list.showLikes = false
+  list.showTableOfContents = false
+  list.showCards = true
+  list.groupByYear = false
+  list.cardView = false
+  list.cardViewScreenWidth = false
+  
+  # Site settings
+  site.showCopyright = true
+  site.showThemeAttribution = false
+  site.showAppearanceSwitcher = true
+  site.showScrollToTop = true
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
