@@ -2,7 +2,7 @@ baseURL = "https://upstart.solutions"
 languageCode = "en-us"
 title = "UpStart Productions"
 theme = "blowfish"
-paginate = 12
+pagination.pagerSize = 12
 enableRobotsTXT = true
 canonifyURLs = true
 
