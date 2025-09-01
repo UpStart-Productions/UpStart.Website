@@ -2,6 +2,22 @@ baseURL = "https://upstartproductions.com"
 languageCode = "en-us"
 title = "UpStart Productions"
 theme = "blowfish"
+paginate = 12
+enableRobotsTXT = true
+canonifyURLs = true
+
+# Clean URLs (Hugo default, but explicit here)
+disablePathToLower = false
+uglyURLs = false
+
+# Goldmark: allow HTML in Markdown (for data-* and inline HTML)
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
 
 # Clean URL structure
 [permalinks]
@@ -82,8 +98,3 @@ theme = "blowfish"
   site.showThemeAttribution = false
   site.showAppearanceSwitcher = true
   site.showScrollToTop = true
-
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
