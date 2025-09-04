@@ -4,6 +4,7 @@ applications:
       phases:
         preBuild:
           commands:
+            # 1) Install Hugo (extended) into a writable path
             - export HUGO_VERSION=${HUGO_VERSION:-0.149.0}
             - curl -sSL -o /tmp/hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz"
             - mkdir -p "$HOME/bin"
@@ -11,7 +12,19 @@ applications:
             - chmod +x "$HOME/bin/hugo"
             - export PATH="$HOME/bin:$PATH"
             - hugo version
+
+            # 2) If your theme needs PostCSS (optional)
             - if [ -f package-lock.json ]; then npm ci; fi
+
+            # 3) FORCE a usable theme, regardless of config style:
+            #    a) If vendored modules exist, copy Blowfish from _vendor to /themes
+            #    b) Else (no vendor), shallow-clone Blowfish v2 into /themes
+            - mkdir -p themes
+            - if [ -d _vendor/github.com/nunocoracao/blowfish/v2 ]; then rsync -a _vendor/github.com/nunocoracao/blowfish/v2/ themes/blowfish/ ; fi
+            - if [ ! -d themes/blowfish ]; then git clone --depth 1 --branch v2 https://github.com/nunocoracao/blowfish themes/blowfish ; fi
+
+            # 4) Explicitly set the theme name so Hugo doesn't look for an empty one
+            - export HUGO_THEME=blowfish
         build:
           commands:
             - echo "Building Hugo site..."
@@ -25,3 +38,4 @@ applications:
           - node_modules/**/*
           - resources/_gen/**/*
           - _vendor/**/*
+          - themes/blowfish/**/*
