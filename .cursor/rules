@@ -1,0 +1,173 @@
+# =========================
+# UpStart Productions — Cursor Rules
+# =========================
+# Purpose: Keep AI edits fast, safe, and consistent across this Hugo + Blowfish project.
+# Repo type: Hugo static site (Hugo Extended), Blowfish v2 via Hugo Modules, deployed on AWS Amplify/CloudFront.
+
+project:
+  summary: >
+    Static website for UpStart Productions (consultancy) with a product page for Nepho.
+    Tech stack: Hugo Extended (>= 0.149.0), Blowfish theme (v2 via modules), dark theme default,
+    AWS Amplify hosting. Content-first; minimal custom templates.
+
+  goals:
+    - Make the site look professional quickly using Blowfish defaults.
+    - Keep configuration modular and readable.
+    - Prefer content in Markdown; only create templates if necessary.
+    - Keep deploys deterministic (Hugo modules, vendoring as needed).
+
+  non_goals:
+    - No full redesign or heavy custom JS/CSS frameworks.
+    - No migration away from Hugo/Blowfish unless explicitly requested.
+
+constraints:
+  - Use Hugo Extended >= 0.149.0; do not downgrade.
+  - Use Blowfish **as a Hugo Module** (no theme subtree unless explicitly requested).
+  - Default appearance is **dark**; avoid low-contrast light styles.
+  - Keep config **split** under `config/_default/` (no giant single-file config).
+  - Avoid breaking URLs; respect existing menu `pageRef`s.
+  - Keep diffs small and reversible; never delete large swaths of content without a clear reason.
+
+conventions:
+  config_files:
+    - config/_default/hugo.toml        # site basics + module imports
+    - config/_default/params.toml      # theme + brand palette + homepage options
+    - config/_default/menus.toml       # navigation
+    - config/_default/languages.en.toml# author/hero text (if using Blowfish homepage layouts)
+
+  content_layout:
+    - Home page: `content/_index.md` (prefer `layout: "simple"` for now)
+    - Nepho: `content/nepho/_index.md`
+    - Other sections: `content/{about,services,portfolio,contact}/_index.md`
+    - Images: `static/img/*`
+    - CSS overrides (if needed): `assets/css/overrides.css` + reference via `params.customCSS`
+
+  theme:
+    blowfish:
+      module_path: github.com/nunocoracao/blowfish/v2
+      usage: hugo modules (no `themes/blowfish` folder unless converting to vendored)
+      dark_mode:
+        - params.defaultAppearance = "dark"
+        - params.colorScheme = "auto"
+        - params.autoSwitchAppearance = false
+      palette:
+        - params.primaryColor   = "#0ea5e9"  # cyan
+        - params.secondaryColor = "#14b8a6"  # teal
+        - params.textColor      = "#f1f5f9"
+        - params.headingColor   = "#ffffff"
+
+  deploy:
+    amplify_env_vars:
+      - HUGO_VERSION=0.149.0
+      - HUGO_EXTENDED=true
+      - HUGO_ENV=production
+    amplify_yml: |
+      version: 1
+      frontend:
+        phases:
+          preBuild:
+            commands:
+              - hugo version
+              - hugo mod get -u || true
+          build:
+            commands:
+              - hugo --gc --minify
+        artifacts:
+          baseDirectory: public
+          files:
+            - '**/*'
+        cache:
+          paths:
+            - _vendor/**/*
+            - resources/_gen/**/*
+
+  authoring_style:
+    - Tone: clear, approachable, privacy-first, nonprofit-friendly.
+    - Headings: concise H2/H3; keep paragraphs short.
+    - Avoid marketing fluff; prefer concrete benefits and outcomes.
+
+ai_behavior:
+  ask_before_major_changes: true
+  small_safe_steps: true
+  include_runnable_instructions: true
+  preserve_existing_copy: true
+  keep_accessibility: true
+
+tasks:
+  - name: add-home-content
+    when: user asks for “home page content” or “quick layout”
+    do:
+      - Ensure `content/_index.md` uses `layout: "simple"`.
+      - Create sections: About, What We Do list, Nepho spotlight, Selected Work, Contact CTA.
+      - Do NOT introduce custom partials unless requested.
+
+  - name: add-nepho-page
+    when: user asks for “Nepho page”
+    do:
+      - Create `content/nepho/_index.md` with Highlights + FAQ + CTA.
+      - Link back to /contact; avoid complex screenshots until assets exist.
+
+  - name: brand-tuning
+    do:
+      - Update `config/_default/params.toml` palette only.
+      - If contrast adjustments needed, create `assets/css/overrides.css` and add:
+        `params.customCSS = ["css/overrides.css"]`.
+
+  - name: navigation
+    do:
+      - Edit `config/_default/menus.toml`. Use `pageRef` for internal links.
+      - Keep weights in 10s (10,20,30…) for easy reordering.
+
+  - name: module-hygiene
+    do:
+      - Ensure `hugo mod init` (once) and module import is present.
+      - Prefer `hugo mod vendor` only if CI can’t access network or we patch theme files.
+      - Never mix `themes/blowfish` folder with module imports.
+
+guards:
+  - If Blowfish emits a “not compatible” warning above 0.148.2, proceed (harmless).
+  - Do not change `baseURL` for local dev; Hugo’s server handles localhost automatically.
+  - Do not add JS toolchains or heavy CSS frameworks; Tailwind is already bundled by theme if needed.
+  - Do not rewrite layouts unless required; prefer configuration and content first.
+
+checklist_before_pr:
+  - `hugo server` renders without errors.
+  - Menus link to real pages (no 404s).
+  - Dark theme has sufficient contrast.
+  - No stray absolute URLs to staging in Markdown.
+  - If new assets added, they live under `static/img/…` and are referenced with `/img/...`.
+
+snippets:
+  set_dark_theme: |
+    # config/_default/params.toml
+    [params]
+      defaultAppearance = "dark"
+      colorScheme = "auto"
+      autoSwitchAppearance = false
+
+  add_custom_css: |
+    # config/_default/params.toml
+    [params]
+      customCSS = ["css/overrides.css"]
+
+    # assets/css/overrides.css
+    .hero .title, h1, h2, h3 { color: #fff !important; }
+    a, .btn-primary { --accent: #0ea5e9; }
+
+  module_import: |
+    # config/_default/hugo.toml
+    [module]
+      [[module.imports]]
+        path = "github.com/nunocoracao/blowfish/v2"
+
+  amplify_env: |
+    HUGO_VERSION=0.149.0
+    HUGO_EXTENDED=true
+    HUGO_ENV=production
+
+review_notes_for_cursor:
+  - Prefer minimal diffs; show a short summary of what changed and why.
+  - Include where to look (files/lines) and how to test (`hugo server`).
+  - If creating new pages, add a bullet to menus or link from existing pages.
+  - If altering config, specify the exact file under `config/_default/…`.
+

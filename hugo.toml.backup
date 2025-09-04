@@ -63,14 +63,23 @@ uglyURLs = false
 # Blowfish theme parameters
 [params]
   colorScheme = "auto"
-  defaultAppearance = "light"
-  autoSwitchAppearance = true
+  defaultAppearance = "dark"
+  autoSwitchAppearance = false
   
   # Site metadata
   description = "UpStart Productions - Creative solutions and innovative technology"
   
   # Homepage layout
   homepage.layout = "hero"
+
+  # Brand palette
+  primaryColor = "#0ea5e9"   # cyan-500 (buttons, links, accents)
+  secondaryColor = "#14b8a6" # teal-500 (hover states, highlights)
+  neutralColor = "#1e293b"   # slate-800 (cards, section backgrounds)
+
+  # Optional: fine-tune text
+  textColor = "#f1f5f9"      # slate-100 (main body text)
+  headingColor = "#ffffff"   # pure white for titles
   
   # Article settings
   article.showDate = true
