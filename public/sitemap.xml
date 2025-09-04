@@ -3,7 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2024-01-15T00:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:1313/nepho-app-launch/</loc>
+    <lastmod>2024-01-15T00:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2024-01-15T00:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:1313/modern-web-development-with-hugo/</loc>
+    <lastmod>2024-01-10T00:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:1313/privacy-first-design-principles/</loc>
+    <lastmod>2024-01-05T00:00:00+00:00</lastmod>
+  </url>
+  <url>
     <loc>http://localhost:1313/about/</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/showcase/</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/demo/</loc>
   </url>
   <url>
     <loc>http://localhost:1313/contact/</loc>
@@ -16,8 +42,5 @@
   </url>
   <url>
     <loc>http://localhost:1313/services/</loc>
-  </url>
-  <url>
-    <loc>http://localhost:1313/</loc>
   </url>
 </urlset>

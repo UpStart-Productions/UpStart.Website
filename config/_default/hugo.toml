@@ -6,6 +6,7 @@ enableRobotsTXT = true
 canonifyURLs = true
 relativeURLs = true
 theme = ""
+mainSections = ["posts"]
 
 [module]
   [[module.imports]]
@@ -14,6 +15,19 @@ theme = ""
 # Clean URLs (Hugo default, but explicit here)
 disablePathToLower = false
 uglyURLs = false
+
+# Output formats for Blowfish
+[outputFormats]
+  [outputFormats.HTML]
+    mediaType = "text/html"
+    isHTML = true
+  [outputFormats.RSS]
+    mediaType = "application/rss+xml"
+    baseName = "index"
+    isHTML = false
+  [outputFormats.JSON]
+    mediaType = "application/json"
+    isHTML = false
 
 # Goldmark: allow HTML in Markdown (for data-* and inline HTML)
 [markup]
@@ -54,6 +68,16 @@ uglyURLs = false
     name = "Nepho"
     pageRef = "/nepho"
     weight = 50
+
+  [[menu.main]]
+    name = "Demo"
+    pageRef = "/demo"
+    weight = 55
+
+  [[menu.main]]
+    name = "Showcase"
+    pageRef = "/showcase"
+    weight = 56
 
   [[menu.main]]
     name = "Contact"

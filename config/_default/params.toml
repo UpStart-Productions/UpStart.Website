@@ -5,9 +5,6 @@
   
   # Site metadata
   description = "UpStart Productions - Creative solutions and innovative technology"
-  
-  # Homepage layout
-  homepage.layout = "hero"
 
   # Brand palette
   primaryColor = "#0ea5e9"   # cyan-500 (buttons, links, accents)
@@ -18,30 +15,36 @@
   textColor = "#f1f5f9"      # slate-100 (main body text)
   headingColor = "#ffffff"   # pure white for titles
   
-  # Article settings
+  # Header settings - make it more visual
+  [params.header]
+    layout = "fixed-fill-blur"
+
+  # Article settings - enable all visual features
   article.showDate = true
   article.showDateUpdated = false
   article.showAuthor = false
-  article.showWordCount = false
-  article.showReadingTime = false
+  article.showWordCount = true
+  article.showReadingTime = true
   article.showEdit = false
   article.showViews = false
   article.showLikes = false
-  article.showTaxonomies = false
+  article.showTaxonomies = true
   article.showPagination = true
   article.invertPagination = false
-  article.showToC = false
+  article.showToC = true
   article.tocOpen = false
+  article.showHero = true
+  article.heroStyle = "background"
   
   # List settings
   list.showBreadcrumbs = false
-  list.showSummary = false
+  list.showSummary = true
   list.showViews = false
   list.showLikes = false
   list.showTableOfContents = false
   list.showCards = true
   list.groupByYear = false
-  list.cardView = false
+  list.cardView = true
   list.cardViewScreenWidth = false
   
   # Site settings

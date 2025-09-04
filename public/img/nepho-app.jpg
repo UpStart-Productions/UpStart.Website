@@ -1,0 +1,6 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="400" fill="#14b8a6"/>
+  <text x="400" y="200" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="middle" dominant-baseline="middle">Nepho App</text>
+  <text x="400" y="240" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle" dominant-baseline="middle">Privacy-First Mobile App</text>
+  <rect x="300" y="280" width="200" height="80" fill="white" opacity="0.2" rx="10"/>
+</svg>

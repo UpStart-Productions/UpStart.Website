@@ -1,68 +1,60 @@
 ---
 title: "UpStart Productions"
-layout: "hero"            # Blowfish hero layout
-# HERO
+description: "Creative tech for nonprofits & innovators"
+layout: "background"
 hero:
-  title: "Creative Tech for Nonprofits & Innovators"
-  subtitle: "We design and build modern websites, apps, and workflow tools—privacy-first and people-first."
-  ctas:
-    - label: "Explore Services"
-      url: "/services"
-    - label: "See Nepho"
-      url: "/nepho"
-
-# OPTIONAL: you can remove anything below and the page still renders fine.
-# SERVICES (Features grid)
+  title: "Creative tech for nonprofits & innovators"
+  subtitle: "Websites, apps, and workflow tools—privacy-first and people-first."
+  image: "img/nepho-app.jpg"
+  imageAlt: "Nepho mobile app interface"
+  button:
+    text: "Get Started"
+    link: "/contact"
+    icon: "arrow-right"
+    variant: "primary"
+  button2:
+    text: "Learn More"
+    link: "/about"
+    icon: "info"
+    variant: "secondary"
 features:
   - title: "Web Development"
     description: "Modern, accessible sites that convert—Hugo, Next.js, or your stack."
-    icon: "globe"
+    icon: "code"
+    link: "/services"
   - title: "Product Design"
     description: "User-centered UX/UI, wireframes, and rapid prototypes."
-    icon: "layers"
+    icon: "palette"
+    link: "/services"
   - title: "Custom Apps"
     description: "Ionic/Angular mobile apps, secure cloud backends, and integrations."
     icon: "smartphone"
+    link: "/services"
   - title: "Technology Consulting"
     description: "Strategy, audits, performance, and privacy-first guidance."
-    icon: "cpu"
-
-# NEPHO SPOTLIGHT CARD
+    icon: "lightbulb"
+    link: "/services"
 cards:
-  - title: "Nepho — Our Flagship App"
-    description: "A privacy-first, offline-friendly mobile app for personal growth and recovery. Built with Ionic/Angular + SQLite, optional encrypted S3 backups."
-    image: ""
-    link:
-      label: "Learn about Nepho"
-      url: "/nepho"
-
-# PORTFOLIO TEASER (edit/expand later)
+  - title: "Featured Project: Nepho"
+    description: "Our flagship app - A privacy-first, offline-friendly mobile app for personal growth and recovery. Built with Ionic/Angular + SQLite, optional encrypted S3 backups."
+    image: "img/nepho-app.jpg"
+    link: "/nepho"
+    button:
+      text: "Learn More"
+      icon: "arrow-right"
 list:
-  title: "Selected Work"
-  description: "A few projects that show our range."
-  items:
-    - title: "Nepho App"
-      url: "/nepho"
-    - title: "Non-profit Websites"
-      url: "/portfolio"
-    - title: "Workflow Tools"
-      url: "/services"
-
-# FINAL CTA
+  title: "Latest Insights"
+  description: "Recent articles and updates from our team"
+  linkText: "View All Posts"
+  link: "/posts"
+  maxItems: 3
 cta:
   title: "Ready to build?"
-  description: "Tell us about your project—we’ll suggest a practical, budget-friendly path."
+  subtitle: "Tell us about your project—we'll suggest a practical, budget-friendly path."
   button:
-    label: "Contact Us"
-    url: "/contact"
+    text: "Contact Us"
+    link: "/contact"
+    icon: "mail"
+    variant: "primary"
 ---
-
-<!--
-Everything above is front-matter JSON/YAML Blowfish reads to build sections.
-You can also add normal Markdown below (it appears under the hero).
--->
-
-## About UpStart
-
-We’re a boutique consultancy with 25+ years of full-stack experience. We help mission-driven teams make smart, sustainable technology decisions—and then ship.
 

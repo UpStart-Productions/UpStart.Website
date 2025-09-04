@@ -1,0 +1,7 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="400" fill="#0ea5e9"/>
+  <text x="400" y="200" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="middle" dominant-baseline="middle">Privacy Shield</text>
+  <text x="400" y="240" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle" dominant-baseline="middle">Data Protection & Security</text>
+  <circle cx="400" cy="280" r="60" fill="white" opacity="0.2"/>
+  <circle cx="400" cy="280" r="40" fill="white" opacity="0.3"/>
+</svg>
