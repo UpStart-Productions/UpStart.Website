@@ -1,11 +1,11 @@
 ---
 title: "Demo Page"
-description: "Showcasing various components and features"
+description: "Showcasing Blowfish components and features"
 ---
 
 # Demo Page
 
-This page showcases various components and features available in our custom template system.
+This page showcases various Blowfish components and features.
 
 ## Text Components
 
@@ -41,103 +41,73 @@ function hello() {
 }
 ```
 
-## Visual Components
+## Blowfish Components
 
-### Sample Cards
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-8">
-  <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
-    <div class="text-3xl mb-4">💻</div>
-    <h3 class="text-xl font-bold mb-2">Web Development</h3>
-    <p class="text-gray-600">Modern, accessible sites that convert—Hugo, Next.js, or your stack.</p>
-  </div>
-  
-  <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
-    <div class="text-3xl mb-4">🎨</div>
-    <h3 class="text-xl font-bold mb-2">Product Design</h3>
-    <p class="text-gray-600">User-centered UX/UI, wireframes, and rapid prototypes.</p>
-  </div>
-  
-  <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
-    <div class="text-3xl mb-4">📱</div>
-    <h3 class="text-xl font-bold mb-2">Custom Apps</h3>
-    <p class="text-gray-600">Ionic/Angular mobile apps, secure cloud backends, and integrations.</p>
-  </div>
-</div>
+### Alerts
+{{< alert >}}
+**Info Alert:** This is an info alert with some important information.
+{{< /alert >}}
 
-### Sample Alerts
-<div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4">
-  <div class="flex">
-    <div class="flex-shrink-0">
-      <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-      </svg>
-    </div>
-    <div class="ml-3">
-      <p class="text-sm text-blue-700">
-        This is an info alert with some important information.
-      </p>
-    </div>
-  </div>
-</div>
+{{< alert icon="fire" cardColor="#e63946" iconColor="#1d3557" textColor="#f1faee" >}}
+**Warning Alert:** This is a warning alert with a caution message.
+{{< /alert >}}
 
-<div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
-  <div class="flex">
-    <div class="flex-shrink-0">
-      <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-      </svg>
-    </div>
-    <div class="ml-3">
-      <p class="text-sm text-yellow-700">
-        This is a warning alert with a caution message.
-      </p>
-    </div>
-  </div>
-</div>
+{{< alert icon="star" cardColor="#059669" iconColor="#ffffff" textColor="#ffffff" >}}
+**Success Alert:** This is a success alert confirming an action was completed.
+{{< /alert >}}
 
-### Sample Buttons
-<div class="flex flex-wrap gap-4 my-8">
-  <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-    Primary Button
-  </button>
-  <button class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-    Secondary Button
-  </button>
-  <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-    Success Button
-  </button>
-  <button class="border border-blue-600 text-blue-600 hover:bg-blue-50 font-bold py-2 px-4 rounded">
-    Outline Button
-  </button>
-</div>
+### Badges
+{{< badge >}}New Feature!{{< /badge >}}
 
-### Sample Progress Bars
-<div class="space-y-4 my-8">
-  <div>
-    <div class="flex justify-between mb-1">
-      <span class="text-sm font-medium text-gray-700">Basic Progress</span>
-      <span class="text-sm font-medium text-gray-700">75%</span>
-    </div>
-    <div class="w-full bg-gray-200 rounded-full h-2">
-      <div class="bg-blue-600 h-2 rounded-full" style="width: 75%"></div>
-    </div>
-  </div>
-  
-  <div>
-    <div class="flex justify-between mb-1">
-      <span class="text-sm font-medium text-gray-700">Success Progress</span>
-      <span class="text-sm font-medium text-gray-700">90%</span>
-    </div>
-    <div class="w-full bg-gray-200 rounded-full h-2">
-      <div class="bg-green-600 h-2 rounded-full" style="width: 90%"></div>
-    </div>
-  </div>
-</div>
+{{< badge >}}Updated{{< /badge >}}
 
-## Media Components
+{{< badge >}}Popular{{< /badge >}}
 
-### Images
-![Sample Image](https://via.placeholder.com/400x300/0ea5e9/ffffff?text=Sample+Image)
+### Buttons
+{{< button href="/contact" target="_self" >}}
+Get Started
+{{< /button >}}
+
+{{< button href="/about" target="_self" >}}
+Learn More
+{{< /button >}}
+
+### Keywords
+{{< keywordList >}}
+{{< keyword icon="github" >}}Web Development{{< /keyword >}}
+{{< keyword icon="code" >}}**Product Design**{{< /keyword >}}
+{{< keyword icon="star" >}}*Custom Apps*{{< /keyword >}}
+{{< /keywordList >}}
+
+### Lead Text
+{{< lead >}}
+This is lead text that emphasizes important introductory information. It's styled to stand out from regular content.
+{{< /lead >}}
+
+### TypeIt Animation
+{{< typeit >}}
+Welcome to our demo page!
+{{< /typeit >}}
+
+### Timeline
+{{< timeline >}}
+
+{{< timelineItem icon="github" header="Web Development" badge="2024" subheader="Modern web solutions" >}}
+Custom websites and web applications built with modern technologies for optimal performance and user experience.
+{{< /timelineItem >}}
+
+{{< timelineItem icon="code" header="Product Design" badge="2024" subheader="User-centered design" >}}
+User-centered design that creates meaningful connections between your brand and your customers.
+{{< /timelineItem >}}
+
+{{< timelineItem icon="star" header="Custom Apps" badge="2024" subheader="Mobile & web applications" >}}
+Native and cross-platform mobile applications that deliver exceptional user experiences.
+{{< /timelineItem >}}
+
+{{< /timeline >}}
+
+### Color Swatches
+{{< swatches "#0ea5e9" "#10b981" "#f59e0b" >}}
 
 ## Advanced Features
 
@@ -149,28 +119,6 @@ $$
 \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
 $$
 
-### Diagrams (if enabled)
-```mermaid
-graph TD
-    A[Start] --> B{Is it working?}
-    B -->|Yes| C[Great!]
-    B -->|No| D[Debug]
-    D --> B
-```
-
 ## Conclusion
 
-This demo page shows many of the components available in our custom template system. You can use these components throughout your site to create rich, interactive content.
-
-## What's Different?
-
-Since we're using a custom template system instead of Blowfish's built-in components, we've simplified the demo to show what works with our current setup:
-
-- ✅ **All text formatting** - Bold, italic, code, lists, etc.
-- ✅ **Links and navigation** - Internal and external links
-- ✅ **Images** - Basic image display
-- ✅ **Code blocks** - Syntax highlighting
-- ✅ **Visual components** - Cards, alerts, buttons, progress bars
-- ✅ **Math and diagrams** - If your Hugo setup supports them
-
-The custom template gives us full control over the styling and ensures everything works consistently across all pages.
+This demo page shows many of the components available in Blowfish. You can use these components throughout your site to create rich, interactive content.
