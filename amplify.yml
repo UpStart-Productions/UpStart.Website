@@ -5,14 +5,15 @@ applications:
       phases:
         preBuild:
           commands:
-            # Install Hugo (extended) – pin a version you like
+            # --- Install Hugo (extended) to /tmp (writable in Amplify) ---
             - HUGO_VERSION=0.128.2
             - curl -L -o /tmp/hugo.tar.gz https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz
-            - tar -xzf /tmp/hugo.tar.gz -C /usr/local/bin hugo
-            - hugo version
+            - tar -xzf /tmp/hugo.tar.gz -C /tmp hugo
+            - chmod +x /tmp/hugo
+            - /tmp/hugo version
         build:
           commands:
-            - hugo --gc --minify
+            - /tmp/hugo --gc --minify
       artifacts:
         baseDirectory: public
         files:
@@ -25,7 +26,6 @@ applications:
         headers:
           - key: Cache-Control
             value: no-cache
-
       # JS/CSS: long-lived + immutable
       - pattern: '**/*.js'
         headers:
@@ -35,20 +35,17 @@ applications:
         headers:
           - key: Cache-Control
             value: max-age=31536000, immutable
-
       # Images & icons: long-lived + immutable
       - pattern: '**/*.{jpg,jpeg,png,gif,svg,webp,ico}'
         headers:
           - key: Cache-Control
             value: max-age=31536000, immutable
-
       # Fonts: long-lived + immutable
       - pattern: '**/*.{woff,woff2,ttf,otf,eot}'
         headers:
           - key: Cache-Control
             value: max-age=31536000, immutable
-
-      # JSON/manifest assets: long-lived if fingerprinted; change to no-cache if you hand-edit without hashing
+      # JSON/manifests: long-lived if fingerprinted; flip to no-cache if you edit in place
       - pattern: '**/*.{json,webmanifest}'
         headers:
           - key: Cache-Control
