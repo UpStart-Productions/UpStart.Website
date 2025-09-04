@@ -1,11 +1,15 @@
 baseURL = "https://upstart.solutions/"
 languageCode = "en-us"
 title = "UpStart Productions"
-theme = "blowfish"
 pagination.pagerSize = 12
 enableRobotsTXT = true
 canonifyURLs = true
 relativeURLs = true
+theme = ""
+
+[module]
+  [[module.imports]]
+    path = "github.com/nunocoracao/blowfish/v2"
 
 # Clean URLs (Hugo default, but explicit here)
 disablePathToLower = false
