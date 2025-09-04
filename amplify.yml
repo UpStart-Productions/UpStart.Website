@@ -1,47 +1,55 @@
 version: 1
 applications:
-  - frontend:
+  - appRoot: .
+    frontend:
       phases:
         preBuild:
           commands:
-            # Install Hugo (extended) in a writable path
-            - export HUGO_VERSION=${HUGO_VERSION:-0.149.0}
-            - curl -sSL -o /tmp/hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz"
-            - mkdir -p "$HOME/bin"
-            - tar -xzf /tmp/hugo.tar.gz -C "$HOME/bin" hugo
-            - chmod +x "$HOME/bin/hugo"
-            - export PATH="$HOME/bin:$PATH"
+            # Install Hugo (extended) – pin a version you like
+            - HUGO_VERSION=0.128.2
+            - curl -L -o /tmp/hugo.tar.gz https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz
+            - tar -xzf /tmp/hugo.tar.gz -C /usr/local/bin hugo
             - hugo version
-
-            # Optional: install PostCSS deps if your repo has a package-lock.json
-            - if [ -f package-lock.json ]; then npm ci; fi
-
-            # Ensure Blowfish theme is present WITHOUT Go or rsync
-            - set -e
-            - VENDOR_PATH="_vendor/github.com/nunocoracao/blowfish/v2"
-            - mkdir -p themes
-            - |
-              if [ -d "$VENDOR_PATH" ]; then
-                echo "Using vendored Blowfish from $VENDOR_PATH"
-                mkdir -p themes/blowfish
-                (cd "$VENDOR_PATH" && tar cf - .) | (cd themes/blowfish && tar xpf -)
-              else
-                echo "Vendored Blowfish not found; cloning theme"
-                git clone --depth 1 --branch v2 https://github.com/nunocoracao/blowfish themes/blowfish \
-                  || git clone --depth 1 https://github.com/nunocoracao/blowfish themes/blowfish
-              fi
         build:
           commands:
-            - echo "Building Hugo site..."
-            # Force the theme to avoid any module/theme ambiguity during CI:
-            - hugo --minify --theme blowfish
+            - hugo --gc --minify
       artifacts:
         baseDirectory: public
         files:
           - '**/*'
       cache:
-        paths:
-          - node_modules/**/*
-          - resources/_gen/**/*
-          - _vendor/**/*
-          - themes/blowfish/**/*
+        paths: []
+    customHeaders:
+      # HTML: always revalidate
+      - pattern: '**/*.html'
+        headers:
+          - key: Cache-Control
+            value: no-cache
+
+      # JS/CSS: long-lived + immutable
+      - pattern: '**/*.js'
+        headers:
+          - key: Cache-Control
+            value: max-age=31536000, immutable
+      - pattern: '**/*.css'
+        headers:
+          - key: Cache-Control
+            value: max-age=31536000, immutable
+
+      # Images & icons: long-lived + immutable
+      - pattern: '**/*.{jpg,jpeg,png,gif,svg,webp,ico}'
+        headers:
+          - key: Cache-Control
+            value: max-age=31536000, immutable
+
+      # Fonts: long-lived + immutable
+      - pattern: '**/*.{woff,woff2,ttf,otf,eot}'
+        headers:
+          - key: Cache-Control
+            value: max-age=31536000, immutable
+
+      # JSON/manifest assets: long-lived if fingerprinted; change to no-cache if you hand-edit without hashing
+      - pattern: '**/*.{json,webmanifest}'
+        headers:
+          - key: Cache-Control
+            value: max-age=31536000, immutable
