@@ -1,6 +1,7 @@
 version: 1
 applications:
-  - frontend:
+  - appRoot: UpStart.Website
+    frontend:
       phases:
         preBuild:
           commands:
@@ -13,22 +14,30 @@ applications:
             - export PATH="$HOME/bin:$PATH"
             - hugo version
 
-            # 2) If your theme needs PostCSS (optional)
+            # 2) Optional: theme PostCSS deps if you have them
             - if [ -f package-lock.json ]; then npm ci; fi
 
-            # 3) FORCE a usable theme, regardless of config style:
-            #    a) If vendored modules exist, copy Blowfish from _vendor to /themes
-            #    b) Else (no vendor), shallow-clone Blowfish v2 into /themes
+            # 3) Ensure Blowfish theme is present WITHOUT Go or rsync:
+            #    a) If vendored modules exist, copy to themes/blowfish (including dotfiles)
+            #    b) Otherwise, shallow-clone v2; if that branch doesn't exist, clone default
+            - set -e
+            - VENDOR_PATH="_vendor/github.com/nunocoracao/blowfish/v2"
             - mkdir -p themes
-            - if [ -d _vendor/github.com/nunocoracao/blowfish/v2 ]; then rsync -a _vendor/github.com/nunocoracao/blowfish/v2/ themes/blowfish/ ; fi
-            - if [ ! -d themes/blowfish ]; then git clone --depth 1 --branch v2 https://github.com/nunocoracao/blowfish themes/blowfish ; fi
-
-            # 4) Explicitly set the theme name so Hugo doesn't look for an empty one
-            - export HUGO_THEME=blowfish
+            - |
+              if [ -d "$VENDOR_PATH" ]; then
+                echo "Using vendored Blowfish from $VENDOR_PATH"
+                mkdir -p themes/blowfish
+                (cd "$VENDOR_PATH" && tar cf - .) | (cd themes/blowfish && tar xpf -)
+              else
+                echo "Vendored Blowfish not found; cloning"
+                git clone --depth 1 --branch v2 https://github.com/nunocoracao/blowfish themes/blowfish \
+                  || git clone --depth 1 https://github.com/nunocoracao/blowfish themes/blowfish
+              fi
         build:
           commands:
             - echo "Building Hugo site..."
-            - hugo --minify
+            # Force the theme so Hugo never tries to resolve an empty theme/module during CI
+            - hugo --minify --theme blowfish
       artifacts:
         baseDirectory: public
         files:
