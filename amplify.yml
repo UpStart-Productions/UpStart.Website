@@ -1,11 +1,10 @@
 version: 1
 applications:
-  - appRoot: UpStart.Website
-    frontend:
+  - frontend:
       phases:
         preBuild:
           commands:
-            # 1) Install Hugo (extended) into a writable path
+            # Install Hugo (extended) in a writable path
             - export HUGO_VERSION=${HUGO_VERSION:-0.149.0}
             - curl -sSL -o /tmp/hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz"
             - mkdir -p "$HOME/bin"
@@ -14,12 +13,10 @@ applications:
             - export PATH="$HOME/bin:$PATH"
             - hugo version
 
-            # 2) Optional: theme PostCSS deps if you have them
+            # Optional: install PostCSS deps if your repo has a package-lock.json
             - if [ -f package-lock.json ]; then npm ci; fi
 
-            # 3) Ensure Blowfish theme is present WITHOUT Go or rsync:
-            #    a) If vendored modules exist, copy to themes/blowfish (including dotfiles)
-            #    b) Otherwise, shallow-clone v2; if that branch doesn't exist, clone default
+            # Ensure Blowfish theme is present WITHOUT Go or rsync
             - set -e
             - VENDOR_PATH="_vendor/github.com/nunocoracao/blowfish/v2"
             - mkdir -p themes
@@ -29,14 +26,14 @@ applications:
                 mkdir -p themes/blowfish
                 (cd "$VENDOR_PATH" && tar cf - .) | (cd themes/blowfish && tar xpf -)
               else
-                echo "Vendored Blowfish not found; cloning"
+                echo "Vendored Blowfish not found; cloning theme"
                 git clone --depth 1 --branch v2 https://github.com/nunocoracao/blowfish themes/blowfish \
                   || git clone --depth 1 https://github.com/nunocoracao/blowfish themes/blowfish
               fi
         build:
           commands:
             - echo "Building Hugo site..."
-            # Force the theme so Hugo never tries to resolve an empty theme/module during CI
+            # Force the theme to avoid any module/theme ambiguity during CI:
             - hugo --minify --theme blowfish
       artifacts:
         baseDirectory: public
