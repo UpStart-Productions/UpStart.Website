@@ -1,0 +1,44 @@
+{{ $homepageImage := "" }}
+{{ with .Site.Params.defaultBackgroundImage }}
+  {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
+    {{ $homepageImage = resources.GetRemote . }}
+  {{ else }}
+    {{ $homepageImage = resources.Get . }}
+  {{ end }}
+{{ end }}
+{{ with .Site.Params.homepage.homepageImage }}
+  {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
+    {{ $homepageImage = resources.GetRemote . }}
+  {{ else }}
+    {{ $homepageImage = resources.Get . }}
+  {{ end }}
+{{ end }}
+
+<!-- Debug: homepageImage = {{ .Site.Params.homepage.homepageImage }} -->
+<!-- Debug: defaultBackgroundImage = {{ .Site.Params.defaultBackgroundImage }} -->
+<!-- Debug: $homepageImage = {{ $homepageImage }} -->
+
+{{ if $homepageImage }}
+  <div class="hero-section" style="position: relative; width: 100vw; height: 400px; margin-left: calc(-50vw + 50%); background-image: url('{{ $homepageImage.RelPermalink }}'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center;">
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.4);"></div>
+    <div style="position: relative; z-index: 1; text-align: center; color: white;">
+      <h1 style="font-size: 3rem; font-weight: bold; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">{{ .Site.Params.Author.name | default .Site.Title }}</h1>
+      <p style="font-size: 1.5rem; margin: 1rem 0 0 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">{{ with .Site.Params.Author.headline }}{{ . | markdownify }}{{ end }}</p>
+    </div>
+  </div>
+{{ else }}
+  <!-- Debug: No image found -->
+  <div class="hero-section" style="position: relative; width: 100vw; height: 400px; margin-left: calc(-50vw + 50%); background-image: url('/img/hero-mountain.jpg'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center;">
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.4);"></div>
+    <div style="position: relative; z-index: 1; text-align: center; color: white;">
+      <h1 style="font-size: 3rem; font-weight: bold; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">{{ .Site.Params.Author.name | default .Site.Title }}</h1>
+      <p style="font-size: 1.5rem; margin: 1rem 0 0 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">{{ with .Site.Params.Author.headline }}{{ . | markdownify }}{{ end }}</p>
+    </div>
+  </div>
+{{ end }}
+
+{{ if .Content }}
+  <div class="mt-8">
+    {{ .Content }}
+  </div>
+{{ end }}
