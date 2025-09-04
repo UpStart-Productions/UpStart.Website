@@ -1,67 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta name="generator" content="Hugo 0.149.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UpStart Productions</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#f0f9ff',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-<body class="bg-gray-50">
-    
-    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <a href="./" class="text-xl font-bold text-gray-900">UpStart Productions</a>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="./" class="text-gray-700 hover:text-primary-600 font-medium">Home</a>
-                    <a href="./about" class="text-gray-700 hover:text-primary-600 font-medium">About</a>
-                    <a href="./services" class="text-gray-700 hover:text-primary-600 font-medium">Services</a>
-                    <a href="./portfolio" class="text-gray-700 hover:text-primary-600 font-medium">Portfolio</a>
-                    <a href="./nepho" class="text-gray-700 hover:text-primary-600 font-medium">Nepho</a>
-                    <a href="./demo" class="text-gray-700 hover:text-primary-600 font-medium">Demo</a>
-                    <a href="./contact" class="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition">Contact</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    
-    <div class="pt-16">
-        
-
+{{ define "content" }}
+<!-- Hero Section -->
 <section class="pt-20 bg-gradient-to-br from-primary-600 via-primary-700 to-blue-800 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div class="text-center">
-            <h1 class="text-5xl md:text-6xl font-bold mb-6">UpStart Productions</h1>
-            <p class="text-xl md:text-2xl mb-8 opacity-90">Creative tech for nonprofits &amp; innovators</p>
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">{{ .Title }}</h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">{{ .Description }}</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="./contact" class="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Get Started</a>
-                <a href="./about" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-600 transition">Learn More</a>
+                <a href="/contact" class="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Get Started</a>
+                <a href="/about" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-600 transition">Learn More</a>
             </div>
         </div>
     </div>
 </section>
 
-
+<!-- Services Section -->
 <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
@@ -97,7 +49,7 @@
     </div>
 </section>
 
-
+<!-- Featured Project Section -->
 <section class="py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
@@ -106,7 +58,7 @@
                     <div class="text-white">
                         <h2 class="text-3xl font-bold mb-4">Featured Project: Nepho</h2>
                         <p class="text-lg mb-6 opacity-90">Our flagship app - A privacy-first, offline-friendly mobile app for personal growth and recovery. Built with Ionic/Angular + SQLite, optional encrypted S3 backups.</p>
-                        <a href="./nepho" class="bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Learn More</a>
+                        <a href="/nepho" class="bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Learn More</a>
                     </div>
                 </div>
                 <div class="md:w-1/2 bg-gray-100 flex items-center justify-center p-12">
@@ -120,24 +72,12 @@
     </div>
 </section>
 
-
+<!-- CTA Section -->
 <section class="py-20 bg-gray-900 text-white">
     <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold mb-4">Ready to build?</h2>
         <p class="text-xl mb-8 opacity-90">Tell us about your project—we'll suggest a practical, budget-friendly path.</p>
-        <a href="./contact" class="bg-primary-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-700 transition">Contact Us</a>
+        <a href="/contact" class="bg-primary-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-700 transition">Contact Us</a>
     </div>
 </section>
-
-    </div>
-
-    
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <p class="text-gray-400">&copy; 2025 UpStart Productions. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-</body>
-</html>
+{{ end }}
